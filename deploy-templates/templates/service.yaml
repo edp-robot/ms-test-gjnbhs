@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ms-test-gjnbhs.fullname" . }}
+  labels:
+    {{- include "ms-test-gjnbhs.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "ms-test-gjnbhs.selectorLabels" . | nindent 4 }}
